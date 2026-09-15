@@ -1,0 +1,4231 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>OFFICIAL TEAM</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Hiragino Kaku Gothic ProN",
+        "Yu Gothic",
+        Meiryo,
+        sans-serif;
+    background: #f6f8fb;
+    color: #172033;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.page {
+    display: block;
+}
+
+body.admin-mode .page {
+    display: none;
+}
+
+.admin-page {
+    display: none;
+}
+
+body.admin-mode .admin-page {
+    display: block;
+}
+
+/* 管理画面から公開ページを確認したときだけ表示する戻るボタン */
+.admin-preview-return {
+    position: fixed;
+    top: 88px;
+    left: 24px;
+    z-index: 2500;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 16px;
+    border: 1px solid #d9dee7;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.96);
+    color: #111827;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 800;
+    box-shadow: 0 8px 24px rgba(15,23,42,0.08);
+    backdrop-filter: blur(10px);
+}
+
+.admin-preview-return:hover {
+    transform: translateY(-1px);
+    background: #f8fafc;
+}
+
+body.admin-preview-mode .admin-preview-return {
+    display: inline-flex;
+}
+
+@media (max-width: 520px) {
+    .admin-preview-return {
+        top: 82px;
+        left: 14px;
+        min-height: 40px;
+        padding: 0 13px;
+        font-size: 12px;
+    }
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 72px;
+    background: rgba(255,255,255,0.96);
+    border-bottom: 1px solid #e8ebf1;
+    backdrop-filter: blur(12px);
+}
+
+.header-inner {
+    max-width: 1200px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.logo {
+    color: #111827;
+    text-decoration: none;
+    font-size: 21px;
+    font-weight: 900;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav a {
+    color: #4b5563;
+    text-decoration: none;
+    padding: 10px 11px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.nav a:hover {
+    background: #f1f3f7;
+    color: #111827;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 720px;
+    padding: 150px 24px 100px;
+    display: flex;
+    align-items: center;
+    background:
+        radial-gradient(circle at 15% 20%, rgba(99,102,241,0.12), transparent 30%),
+        radial-gradient(circle at 85% 70%, rgba(236,72,153,0.10), transparent 30%),
+        #ffffff;
+}
+
+.hero-inner {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.hero-label {
+    display: inline-block;
+    margin-bottom: 22px;
+    padding: 8px 13px;
+    border-radius: 999px;
+    background: #eef2ff;
+    color: #4f46e5;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+}
+
+.hero h1 {
+    max-width: 850px;
+    margin: 0;
+    color: #111827;
+    font-size: clamp(42px, 7vw, 82px);
+    line-height: 1.03;
+    letter-spacing: -0.04em;
+}
+
+.hero-description {
+    max-width: 700px;
+    margin: 28px 0 0;
+    color: #667085;
+    font-size: 18px;
+    line-height: 1.9;
+}
+
+.hero-buttons {
+    margin-top: 36px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.hero-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 0 20px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 14px;
+    border: 1px solid #dfe3ea;
+    background: #ffffff;
+    color: #1f2937;
+    transition: 0.2s;
+}
+
+.hero-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(15,23,42,0.08);
+}
+
+.hero-button.primary {
+    background: #111827;
+    border-color: #111827;
+    color: #ffffff;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+.section {
+    padding: 100px 24px;
+}
+
+.section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-heading {
+    margin-bottom: 42px;
+}
+
+.section-label {
+    color: #6366f1;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+}
+
+.section-title {
+    margin: 10px 0 0;
+    font-size: clamp(30px, 5vw, 48px);
+    line-height: 1.1;
+    color: #111827;
+}
+
+.section-description {
+    max-width: 700px;
+    margin-top: 16px;
+    color: #6b7280;
+    line-height: 1.8;
+}
+
+/* =========================
+   RESULTS
+========================= */
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.result-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 8px 30px rgba(15,23,42,0.04);
+}
+
+.result-date {
+    color: #7c8493;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.result-title {
+    margin-top: 12px;
+    color: #111827;
+    font-size: 19px;
+    font-weight: 900;
+}
+
+.result-score {
+    margin-top: 14px;
+    color: #4f46e5;
+    font-size: 26px;
+    font-weight: 900;
+}
+
+.result-description {
+    margin-top: 10px;
+    color: #667085;
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-box {
+    padding: 42px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 22px;
+    box-shadow: 0 10px 35px rgba(15,23,42,0.04);
+}
+
+.about-text {
+    margin: 0;
+    color: #596273;
+    font-size: 17px;
+    line-height: 2;
+    white-space: pre-wrap;
+}
+
+/* =========================
+   DEPARTMENTS
+========================= */
+
+.departments-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.department-card {
+    position: relative;
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(15,23,42,0.04);
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.department-card:hover {
+    transform: translateY(-4px);
+    border-color: #c7d2fe;
+    box-shadow: 0 14px 35px rgba(15,23,42,0.08);
+}
+
+.department-number {
+    color: #818cf8;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+}
+
+.department-name {
+    margin-top: 14px;
+    color: #111827;
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.department-description {
+    margin-top: 12px;
+    color: #697386;
+    line-height: 1.8;
+    white-space: pre-wrap;
+}
+
+.department-more {
+    margin-top: 22px;
+    color: #4f46e5;
+    font-size: 13px;
+    font-weight: 900;
+}
+
+/* =========================
+   SPONSOR
+========================= */
+
+.sponsor-box {
+    padding: 42px;
+    border-radius: 22px;
+    background: #111827;
+    color: #ffffff;
+}
+
+.sponsor-title {
+    margin: 0;
+    font-size: 30px;
+}
+
+.sponsor-text {
+    margin: 18px 0 0;
+    color: #cbd5e1;
+    line-height: 1.9;
+    white-space: pre-wrap;
+}
+
+/* =========================
+   APPLICATION FORM
+========================= */
+
+.application-section {
+    background: #ffffff;
+}
+
+.application-box {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 42px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 24px;
+    box-shadow: 0 12px 40px rgba(15,23,42,0.06);
+}
+
+.application-notice {
+    margin-bottom: 30px;
+    padding: 16px 18px;
+    border-radius: 12px;
+    background: #f5f7ff;
+    color: #4b5563;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.application-field {
+    margin-bottom: 20px;
+}
+
+.application-field label {
+    display: block;
+    margin-bottom: 8px;
+    color: #1f2937;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.required {
+    margin-left: 5px;
+    color: #dc2626;
+    font-size: 11px;
+}
+
+.application-field input,
+.application-field select,
+.application-field textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #d9dee7;
+    border-radius: 11px;
+    background: #ffffff;
+    color: #111827;
+    outline: none;
+}
+
+.application-field input:focus,
+.application-field select:focus,
+.application-field textarea:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99,102,241,0.10);
+}
+
+.application-field textarea {
+    min-height: 140px;
+    resize: vertical;
+    line-height: 1.7;
+}
+
+.application-field small {
+    display: block;
+    margin-top: 7px;
+    color: #7c8493;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.application-submit {
+    width: 100%;
+    min-height: 54px;
+    margin-top: 8px;
+    border: 0;
+    border-radius: 12px;
+    background: #111827;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.apply-dm-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.application-submit:hover {
+    background: #1f2937;
+}
+
+.application-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.application-error {
+    display: none;
+    margin-bottom: 18px;
+    padding: 13px 15px;
+    border-radius: 10px;
+    background: #fff1f2;
+    color: #be123c;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.application-error.active {
+    display: block;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer {
+    padding: 50px 24px;
+    background: #111827;
+    color: #94a3b8;
+}
+
+.footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-name {
+    color: #ffffff;
+    font-weight: 900;
+}
+
+.footer-copy {
+    font-size: 13px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.department-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(15,23,42,0.55);
+}
+
+.department-modal.active {
+    display: flex;
+}
+
+.department-modal-content {
+    position: relative;
+    width: min(680px, 100%);
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: 38px;
+    border-radius: 24px;
+    background: #ffffff;
+    box-shadow: 0 25px 70px rgba(0,0,0,0.2);
+}
+
+.department-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: #f1f3f6;
+    color: #374151;
+    font-size: 22px;
+}
+
+.department-modal-label {
+    color: #6366f1;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+}
+
+.department-modal-title {
+    margin: 12px 0 0;
+    font-size: 34px;
+    color: #111827;
+}
+
+.department-modal-description {
+    margin-top: 24px;
+    color: #596273;
+    line-height: 2;
+    white-space: pre-wrap;
+}
+
+/* =========================
+   ADMIN
+========================= */
+
+.admin-page {
+    min-height: 100vh;
+    background: #f5f7fb;
+}
+
+.admin-header {
+    position: sticky;
+    top: 0;
+    z-index: 500;
+    background: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.admin-header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.admin-header h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #111827;
+}
+
+.admin-header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px 100px;
+}
+
+.admin-section {
+    margin-bottom: 26px;
+    padding: 28px;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+}
+
+.admin-section h2 {
+    margin: 0 0 10px;
+    color: #111827;
+    font-size: 20px;
+}
+
+.admin-section-description {
+    margin: 0 0 22px;
+    color: #6b7280;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+.admin-field {
+    margin-bottom: 18px;
+}
+
+.admin-field:last-child {
+    margin-bottom: 0;
+}
+
+.admin-field label {
+    display: block;
+    margin-bottom: 7px;
+    color: #374151;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.admin-field input,
+.admin-field textarea,
+.admin-field select {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #d9dee7;
+    border-radius: 10px;
+    outline: none;
+    background: #ffffff;
+    color: #111827;
+}
+
+.admin-field textarea {
+    min-height: 130px;
+    resize: vertical;
+    line-height: 1.7;
+}
+
+.admin-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.admin-button {
+    min-height: 42px;
+    padding: 0 16px;
+    border: 1px solid #d9dee7;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #374151;
+    font-weight: 800;
+}
+
+.admin-button.primary {
+    border-color: #111827;
+    background: #111827;
+    color: #ffffff;
+}
+
+.admin-button.danger {
+    border-color: #fecaca;
+    background: #fff1f2;
+    color: #be123c;
+}
+
+.admin-item {
+    margin-bottom: 18px;
+    padding: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #fafbfc;
+}
+
+.admin-item-title {
+    margin-bottom: 14px;
+    color: #111827;
+    font-size: 16px;
+    font-weight: 900;
+}
+
+.admin-option-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.admin-option-row input {
+    flex: 1;
+}
+
+.admin-save-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 800;
+    padding: 12px 20px;
+    background: rgba(255,255,255,0.96);
+    border-top: 1px solid #e5e7eb;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+.admin-save-message {
+    color: #15803d;
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+/* =========================
+   ADMIN ICON UPLOAD
+========================= */
+
+.admin-icon-upload-box {
+    margin-top: 10px;
+    padding: 16px;
+    border: 1px dashed #cbd5e1;
+    border-radius: 14px;
+    background: #f8fafc;
+}
+
+.admin-icon-upload-title {
+    font-size: 14px;
+    font-weight: 900;
+    color: #111827;
+}
+
+.admin-icon-upload-text {
+    margin-top: 5px;
+    margin-bottom: 12px;
+    color: #64748b;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.admin-upload-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: 0 18px;
+    border-radius: 10px;
+    background: #111827;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.admin-upload-button input[type="file"] {
+    display: none;
+}
+
+/* =========================
+   MEMBER / ICONS
+========================= */
+
+.department-icon {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 18px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.department-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.department-icon-placeholder {
+    color: #9ca3af;
+    font-size: 12px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.member-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 28px;
+}
+
+.member-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: #fafbfc;
+}
+
+.member-image {
+    width: 64px;
+    height: 64px;
+    flex: 0 0 64px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #eef0f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.member-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.member-image-placeholder {
+    color: #9ca3af;
+    font-size: 10px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.member-name {
+    color: #111827;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.member-role {
+    margin-top: 4px;
+    color: #6b7280;
+    font-size: 12px;
+}
+
+.member-x {
+    display: inline-block;
+    margin-top: 7px;
+    color: #4f46e5;
+    font-size: 12px;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.member-empty {
+    margin-top: 26px;
+    padding: 18px;
+    border-radius: 14px;
+    background: #f8fafc;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.admin-image-preview {
+    width: 96px;
+    height: 96px;
+    margin-top: 10px;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    background: #f3f4f6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-image-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.admin-image-preview.empty {
+    color: #9ca3af;
+    font-size: 11px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.admin-member-item {
+    margin-top: 16px;
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+}
+
+.admin-member-title {
+    margin-bottom: 14px;
+    color: #374151;
+    font-size: 14px;
+    font-weight: 900;
+}
+
+.admin-member-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.admin-member-grid .admin-field {
+    margin-bottom: 12px;
+}
+
+.admin-member-image-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.admin-file-note {
+    color: #7c8493;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+@media (max-width: 650px) {
+    .member-list,
+    .admin-member-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 850px) {
+
+    .nav {
+        display: none;
+    }
+
+    .hero {
+        min-height: 650px;
+        padding-top: 125px;
+    }
+
+    .results-grid,
+    .departments-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-box,
+    .sponsor-box,
+    .application-box,
+    .admin-section {
+        padding: 24px;
+    }
+
+    .footer-inner {
+        flex-direction: column;
+    }
+
+    .admin-header-inner {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .admin-option-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+@media (max-width: 520px) {
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-button {
+        width: 100%;
+    }
+
+    .section {
+        padding: 75px 18px;
+    }
+
+    .header-inner {
+        padding: 0 18px;
+    }
+
+    .admin-container {
+        padding: 24px 14px 100px;
+    }
+
+    .department-modal-content {
+        padding: 28px 22px;
+    }
+
+    .application-box {
+        padding: 20px;
+    }
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+<a
+    href="#admin"
+    class="admin-preview-return"
+    id="adminPreviewReturn"
+    onclick="returnToAdmin(event)"
+    aria-label="管理者ダッシュボードに戻る"
+>
+    ← 管理画面に戻る
+</a>
+
+<!-- =========================
+     PUBLIC PAGE
+========================= -->
+
+<div class="page">
+
+<header class="site-header">
+    <div class="header-inner">
+
+        <a href="#top" class="logo" id="headerTeamName">
+            OFFICIAL TEAM
+        </a>
+
+        <nav class="nav">
+            <a href="#results">最近の戦績</a>
+            <a href="#members">メンバー紹介</a>
+            <a href="#about">ABOUT</a>
+            <a href="#sponsors">SPONSORS</a>
+            <a href="#apply">所属希望</a>
+            <a href="https://x.com/" id="navXLink" onclick="return openOfficialX(event)">公式X</a>
+            <a href="#" id="navDiscordLink" target="_blank" rel="noopener">Discord</a>
+        </nav>
+
+    </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+    <div class="hero-inner">
+
+        <div class="hero-label">
+            OFFICIAL ESPORTS & STREAMER TEAM
+        </div>
+
+        <h1 id="heroTeamName">
+            OFFICIAL TEAM
+        </h1>
+
+        <p class="hero-description">
+            スマートフォンゲームを中心に活動するeスポーツ＆ストリーマーチーム。
+            競技、配信、コミュニティを通して、新しい挑戦を続けます。
+        </p>
+
+        <div class="hero-buttons">
+
+            <a
+                class="hero-button primary"
+                id="heroDiscord"
+                href="#"
+                target="_blank"
+                rel="noopener"
+            >
+                Discordに参加
+            </a>
+
+            <a
+                class="hero-button"
+                href="#apply"
+            >
+                所属希望・応募はこちら
+            </a>
+
+            <a
+                class="hero-button"
+                id="heroX"
+                href="#"
+                target="_blank"
+                rel="noopener"
+            >
+                公式X
+            </a>
+
+        </div>
+
+    </div>
+</section>
+
+
+<section class="section" id="results">
+    <div class="section-inner">
+
+        <div class="section-heading">
+            <div class="section-label">RESULTS</div>
+            <h2 class="section-title">最近の戦績</h2>
+            <p class="section-description">
+                チームの最新の大会結果や活動実績を掲載しています。
+            </p>
+        </div>
+
+        <div class="results-grid" id="resultsGrid"></div>
+
+    </div>
+</section>
+
+
+<section class="section" id="about">
+    <div class="section-inner">
+
+        <div class="section-heading">
+            <div class="section-label">ABOUT</div>
+            <h2 class="section-title">チームについて</h2>
+        </div>
+
+        <div class="about-box">
+            <p class="about-text" id="aboutText"></p>
+        </div>
+
+    </div>
+</section>
+
+
+<section class="section" id="members">
+    <div class="section-inner">
+
+        <div class="section-heading">
+            <div class="section-label">MEMBERS</div>
+            <h2 class="section-title">メンバー紹介</h2>
+            <p class="section-description">
+                所属する各部門を紹介しています。
+                カードを押すと部門の詳細を確認できます。
+            </p>
+        </div>
+
+        <div class="departments-grid" id="departmentsGrid"></div>
+
+    </div>
+</section>
+
+
+<section class="section" id="sponsors">
+    <div class="section-inner">
+
+        <div class="section-heading">
+            <div class="section-label">SPONSORS & PARTNERS</div>
+            <h2 class="section-title">スポンサー・パートナー</h2>
+        </div>
+
+        <div class="sponsor-box">
+
+            <h3 class="sponsor-title">
+                スポンサー募集中
+            </h3>
+
+            <p
+                class="sponsor-text"
+                id="sponsorText"
+            ></p>
+
+        </div>
+
+    </div>
+</section>
+
+
+<!-- =========================
+     APPLICATION
+========================= -->
+
+<section class="section application-section" id="apply">
+
+    <div class="section-inner">
+
+        <div class="section-heading">
+
+            <div class="section-label">
+                JOIN US
+            </div>
+
+            <h2 class="section-title">
+                所属希望・応募
+            </h2>
+
+            <p class="section-description">
+                チームへの所属を希望する方は、公式XのDMからご連絡ください。
+            </p>
+
+        </div>
+
+        <div class="application-box">
+
+            <div class="application-notice" id="applicationDmText">
+                XのDMで「応募をお願いします」または「応募をしたいです」と入力してください。担当者が確認後、返信します。
+            </div>
+
+            <a
+                class="application-submit apply-dm-button"
+                id="applicationDmButton"
+                href="#"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                XのDMで応募する
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<footer class="site-footer">
+
+    <div class="footer-inner">
+
+        <div
+            class="footer-name"
+            id="footerTeamName"
+        >
+            OFFICIAL TEAM
+        </div>
+
+        <div
+            class="footer-copy"
+            id="footerCopyright"
+        >
+            © 2026 OFFICIAL TEAM All Rights Reserved.
+        </div>
+
+    </div>
+
+</footer>
+
+</div>
+
+
+<!-- =========================
+     MODAL
+========================= -->
+
+<div
+    class="department-modal"
+    id="departmentModal"
+    onclick="handleModalBackgroundClick(event)"
+>
+
+    <div class="department-modal-content">
+
+        <button
+            class="department-modal-close"
+            onclick="closeDepartmentModal()"
+            aria-label="閉じる"
+        >
+            ×
+        </button>
+
+        <div
+            class="department-modal-label"
+            id="departmentModalLabel"
+        >
+            DEPARTMENT
+        </div>
+
+        <div
+            class="department-modal-icon"
+            id="departmentModalIcon"
+        ></div>
+
+        <h2
+            class="department-modal-title"
+            id="departmentModalTitle"
+        ></h2>
+
+        <div
+            class="department-modal-description"
+            id="departmentModalDescription"
+        ></div>
+
+        <div id="departmentModalMembers"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     ADMIN PAGE
+========================= -->
+
+<div class="admin-page">
+
+<header class="admin-header">
+
+    <div class="admin-header-inner">
+
+        <h1>
+            管理者ダッシュボード
+        </h1>
+
+        <div class="admin-header-actions">
+
+            <button
+                class="admin-button"
+                onclick="openPublicSite()"
+            >
+                公開ページを見る
+            </button>
+
+            <button
+                class="admin-button primary"
+                onclick="saveAllData()"
+            >
+                保存する
+            </button>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<main class="admin-container">
+
+
+<section class="admin-section">
+
+    <h2>
+        基本設定
+    </h2>
+
+    <div class="admin-field">
+
+        <label>
+            チーム名
+        </label>
+
+        <input
+            id="adminTeamName"
+            type="text"
+        >
+
+    </div>
+
+
+    <div class="admin-field">
+
+        <label>
+            公式X URL（公式Xボタンのリンク先）
+        </label>
+
+        <input
+            id="adminXUrl"
+            type="url"
+            placeholder="https://x.com/..."
+            autocomplete="url"
+        >
+
+        <div class="admin-file-note">
+            ここに設定したURLが、公開ページの「公式X」ボタンとヘッダーの「公式X」のリンク先になります。
+            保存するとSupabaseに保存され、別の端末から見ても同じURLが使われます。
+        </div>
+
+    </div>
+
+
+    <div class="admin-field">
+
+        <label>
+            Discord招待URL
+        </label>
+
+        <input
+            id="adminDiscordUrl"
+            type="url"
+        >
+
+    </div>
+
+</section>
+
+
+<section class="admin-section">
+
+    <h2>
+        ABOUT
+    </h2>
+
+    <div class="admin-field">
+
+        <label>
+            チーム紹介
+        </label>
+
+        <textarea
+            id="adminAbout"
+        ></textarea>
+
+    </div>
+
+</section>
+
+
+<section class="admin-section">
+
+    <h2>
+        部門・メンバー情報
+    </h2>
+
+    <p class="admin-section-description">
+        公開ページの「メンバー紹介」に表示される部門を管理できます。
+        部門カードを押すと、ここで設定した説明・メンバー情報が表示されます。
+    </p>
+
+    <div id="adminDepartments"></div>
+
+    <div class="admin-buttons">
+
+        <button
+            class="admin-button primary"
+            onclick="addDepartment()"
+        >
+            部門を追加
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     APPLICATION SETTINGS
+========================= -->
+
+<section class="admin-section">
+
+    <h2>
+        所属希望・応募設定
+    </h2>
+
+    <p class="admin-section-description">
+        所属希望・応募はフォームを使わず、公式XのDMで受け付けます。
+        公開ページに表示する案内文と、応募先のX DM URLをここで設定できます。
+    </p>
+
+    <div class="admin-field">
+
+        <label>
+            X DM応募URL
+        </label>
+
+        <input
+            id="adminXdmUrl"
+            type="url"
+            placeholder="https://x.com/messages/compose"
+        >
+
+        <div class="admin-file-note">
+            XのDM画面へ移動するURLを入力してください。
+        </div>
+
+    </div>
+
+    <div class="admin-field">
+
+        <label>
+            応募案内文
+        </label>
+
+        <textarea
+            id="adminApplicationDmText"
+        ></textarea>
+
+    </div>
+
+</section>
+
+
+<section class="admin-section">
+
+    <h2>
+        最近の戦績
+    </h2>
+
+    <div id="adminResults"></div>
+
+    <div class="admin-buttons">
+
+        <button
+            class="admin-button primary"
+            onclick="addResult()"
+        >
+            戦績を追加
+        </button>
+
+    </div>
+
+</section>
+
+
+<section class="admin-section">
+
+    <h2>
+        スポンサー募集
+    </h2>
+
+    <div class="admin-field">
+
+        <label>
+            募集・説明文
+        </label>
+
+        <textarea
+            id="adminSponsorText"
+        ></textarea>
+
+    </div>
+
+</section>
+
+
+<section class="admin-section">
+
+    <h2>
+        チーム運営ルール
+    </h2>
+
+    <div class="admin-field">
+
+        <label>
+            公開するルール
+        </label>
+
+        <textarea
+            id="adminRules"
+        ></textarea>
+
+    </div>
+
+</section>
+
+
+<section class="admin-section">
+
+    <h2>
+        データ管理
+    </h2>
+
+    <div class="admin-buttons">
+
+        <button
+            class="admin-button primary"
+            onclick="saveAllData()"
+        >
+            変更を保存
+        </button>
+
+        <button
+            class="admin-button danger"
+            onclick="resetData()"
+        >
+            初期データに戻す
+        </button>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<div class="admin-save-bar">
+
+    <div
+        class="admin-save-message"
+        id="adminSaveMessage"
+    >
+        管理画面
+    </div>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =========================
+   SUPABASE CONFIG
+   ========================= */
+
+const SUPABASE_URL = "https://bpuuoutjyxbjuxbulxyu.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_iyEEH6h3fy4Uz0qyBiFi6w_YXiorOh-";
+const STORAGE_BUCKET = "team-images";
+
+const supabaseConfigured =
+    Boolean(SUPABASE_URL) &&
+    Boolean(SUPABASE_ANON_KEY) &&
+    !SUPABASE_ANON_KEY.includes("ここにSupabase");
+
+const supabaseClient = supabaseConfigured
+    ? window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+    )
+    : null;
+
+
+/* =========================
+   DEFAULT DATA
+========================= */
+
+const defaultData = {
+    teamName: "PROUD",
+    xUrl: "",
+    discordUrl: "",
+    xDmUrl: "https://x.com/messages/compose",
+
+    about:
+`私たちはスマートフォンゲームを中心に活動するeスポーツ＆ストリーマーチームです。
+
+競技活動だけでなく、配信やコミュニティ活動にも力を入れています。
+
+誰でも新しいことに挑戦でき、チームと一緒に成長できる場所を目指しています。`,
+
+    sponsorText:
+`私たちの活動を応援していただけるスポンサー・パートナー企業様を募集しています。
+
+eスポーツ、ゲーム、ストリーミングなどの分野を通して、さまざまな形で協力していきます。`,
+
+    rules:
+`・無断での脱退は禁止です。
+・他チームへの無断勧誘・引き抜きは禁止です。
+・大会、配信バトルなどの個人イベントに参加する場合は、原則3日前までに申請してください。
+・チーム内の連絡はDiscordを基本とします。`,
+
+    departments: [
+        {
+            id: crypto.randomUUID(),
+            name: "マリオカート部門",
+            icon: "",
+            description:
+`マリオカートシリーズを中心に競技活動を行う部門です。
+
+メンバー情報
+現在メンバー募集中です。`,
+            members: []
+        },
+        {
+            id: crypto.randomUUID(),
+            name: "ブロスタ部門",
+            icon: "",
+            description:
+`ブロスタを中心に競技活動を行う部門です。
+
+メンバー情報
+現在メンバー募集中です。`,
+            members: []
+        },
+        {
+            id: crypto.randomUUID(),
+            name: "Pokémon UNITE部門",
+            icon: "",
+            description:
+`Pokémon UNITEを中心に競技活動を行う部門です。
+
+メンバー情報
+現在メンバー募集中です。`,
+            members: []
+        },
+        {
+            id: crypto.randomUUID(),
+            name: "ストリーマー部門",
+            icon: "",
+            description:
+`ゲーム配信や動画投稿などを中心に活動する部門です。
+
+競技部門との兼任も可能です。
+
+メンバー情報
+現在メンバー募集中です。`,
+            members: []
+        }
+    ],
+
+    applicationDmText:
+`XのDMで「応募をお願いします」または「応募をしたいです」と入力してください。
+担当者が確認後、返信します。`,
+
+    results: [
+        {
+            id: crypto.randomUUID(),
+            date: "2026.00.00",
+            title: "大会結果",
+            score: "RESULT",
+            description: "大会結果をここに掲載します。"
+        },
+        {
+            id: crypto.randomUUID(),
+            date: "2026.00.00",
+            title: "オンライン大会",
+            score: "RESULT",
+            description: "大会結果をここに掲載します。"
+        }
+    ]
+};
+
+
+let siteData;
+let supabaseReady = false;
+
+
+/* =========================
+   HELPERS
+========================= */
+
+function makeId() {
+    if (window.crypto && crypto.randomUUID) {
+        return crypto.randomUUID();
+    }
+
+    return "id-" +
+        Date.now() +
+        "-" +
+        Math.random().toString(36).slice(2);
+}
+
+
+function cloneDefaultData() {
+    return JSON.parse(JSON.stringify(defaultData));
+}
+
+
+function normalizeData() {
+    if (!siteData || typeof siteData !== "object") {
+        siteData = cloneDefaultData();
+    }
+
+    siteData.teamName = siteData.teamName || "PROUD";
+    siteData.xUrl = siteData.xUrl || "";
+    siteData.discordUrl = siteData.discordUrl || "";
+    siteData.xDmUrl =
+        siteData.xDmUrl ||
+        "https://x.com/messages/compose";
+
+    siteData.about = siteData.about || "";
+    siteData.sponsorText = siteData.sponsorText || "";
+    siteData.rules = siteData.rules || defaultData.rules;
+
+    siteData.applicationDmText =
+        siteData.applicationDmText ||
+        defaultData.applicationDmText;
+
+    siteData.departments =
+        Array.isArray(siteData.departments)
+            ? siteData.departments.map(function(department) {
+                return {
+                    id: department.id || makeId(),
+                    name: department.name || "",
+                    icon: department.icon || "",
+                    description: department.description || "",
+                    members: Array.isArray(department.members)
+                        ? department.members.map(function(member) {
+                            return {
+                                id: member.id || makeId(),
+                                name: member.name || "",
+                                role: member.role || "",
+                                x: member.x || "",
+                                image: member.image || ""
+                            };
+                        })
+                        : []
+                };
+            })
+            : [];
+
+    siteData.results =
+        Array.isArray(siteData.results)
+            ? siteData.results.map(function(result) {
+                return {
+                    id: result.id || makeId(),
+                    date: result.date || "",
+                    title: result.title || "",
+                    score: result.score || "",
+                    description: result.description || ""
+                };
+            })
+            : [];
+}
+
+
+/* =========================
+   SUPABASE LOAD
+========================= */
+
+async function loadData() {
+    normalizeData();
+
+    if (!supabaseConfigured || !supabaseClient) {
+        // Publishable key未設定でも公開ページは表示できるようにする。
+        // Supabase連携（管理画面の保存・共有データ取得）はkey設定後に有効になる。
+        supabaseReady = false;
+        renderSite();
+        return;
+    }
+
+    try {
+        const [
+            settingsResponse,
+            departmentsResponse,
+            membersResponse,
+            resultsResponse
+        ] = await Promise.all([
+            supabaseClient
+                .from("team_settings")
+                .select("*")
+                .order("id", { ascending: true })
+                .limit(1),
+
+            supabaseClient
+                .from("departments")
+                .select("*")
+                .order("display_order", { ascending: true })
+                .order("created_at", { ascending: true }),
+
+            supabaseClient
+                .from("members")
+                .select("*")
+                .order("display_order", { ascending: true })
+                .order("created_at", { ascending: true }),
+
+            supabaseClient
+                .from("match_results")
+                .select("*")
+                .order("display_order", { ascending: true })
+                .order("match_date", { ascending: false })
+                .order("created_at", { ascending: false })
+        ]);
+
+        const errors = [
+            settingsResponse.error,
+            departmentsResponse.error,
+            membersResponse.error,
+            resultsResponse.error
+        ].filter(Boolean);
+
+        if (errors.length) {
+            throw errors[0];
+        }
+
+        const settings =
+            settingsResponse.data &&
+            settingsResponse.data[0];
+
+        const departments =
+            departmentsResponse.data || [];
+
+        const members =
+            membersResponse.data || [];
+
+        const results =
+            resultsResponse.data || [];
+
+        siteData = cloneDefaultData();
+
+        if (settings) {
+            siteData.teamName =
+                settings.team_name || siteData.teamName;
+
+            siteData.xUrl =
+                settings.x_url || "";
+
+            siteData.discordUrl =
+                settings.discord_url || "";
+
+            siteData.xDmUrl =
+                settings.x_dm_url ||
+                "https://x.com/messages/compose";
+
+            siteData.applicationDmText =
+                settings.application_text ||
+                defaultData.applicationDmText;
+
+            siteData.sponsorText =
+                settings.sponsor_text || "";
+
+            if ("rules" in settings) {
+                siteData.rules =
+                    settings.rules || defaultData.rules;
+            }
+        }
+
+        siteData.departments =
+            departments.map(function(department) {
+                return {
+                    id: department.id,
+                    name: department.name || "",
+                    icon: department.icon_url || "",
+                    description: department.description || "",
+                    members: members
+                        .filter(function(member) {
+                            return member.department_id === department.id;
+                        })
+                        .map(function(member) {
+                            return {
+                                id: member.id,
+                                name: member.name || "",
+                                role: member.role || "",
+                                x: member.x_url || "",
+                                image: member.image_url || ""
+                            };
+                        })
+                };
+            });
+
+        siteData.results =
+            results.map(function(result) {
+                return {
+                    id: result.id,
+                    date: result.match_date
+                        ? result.match_date.replaceAll("-", ".")
+                        : "",
+                    title: result.department_name || "",
+                    score: result.score || result.result || "",
+                    description: result.description || ""
+                };
+            });
+
+        normalizeData();
+        supabaseReady = true;
+
+    } catch (error) {
+        console.error("Supabase load error:", error);
+        supabaseReady = false;
+
+        showConnectionError(
+            "Supabaseからデータを読み込めませんでした。RLS・テーブル設定・Publishable keyを確認してください。"
+        );
+
+        siteData = cloneDefaultData();
+        normalizeData();
+    }
+}
+
+
+function showConnectionError(message) {
+    const old =
+        document.getElementById("supabaseConnectionError");
+
+    if (old) {
+        old.remove();
+    }
+
+    const element =
+        document.createElement("div");
+
+    element.id =
+        "supabaseConnectionError";
+
+    element.style.position = "fixed";
+    element.style.left = "16px";
+    element.style.right = "16px";
+    element.style.bottom = "16px";
+    element.style.zIndex = "99999";
+    element.style.padding = "14px 16px";
+    element.style.borderRadius = "12px";
+    element.style.background = "#fff1f2";
+    element.style.border = "1px solid #fecdd3";
+    element.style.color = "#9f1239";
+    element.style.fontSize = "13px";
+    element.style.lineHeight = "1.7";
+    element.style.boxShadow =
+        "0 10px 30px rgba(0,0,0,0.12)";
+    element.textContent = message;
+
+    document.body.appendChild(element);
+}
+
+
+/* =========================
+   PUBLIC RENDER
+========================= */
+
+function normalizeExternalUrl(value, fallback) {
+    const raw = String(value || "").trim();
+    if (!raw) return fallback;
+
+    try {
+        const url = new URL(raw);
+        if (url.protocol === "http:" || url.protocol === "https:") {
+            return url.href;
+        }
+    } catch (error) {
+        console.warn("Invalid external URL:", raw);
+    }
+
+    return fallback;
+}
+
+function openOfficialX(event) {
+    if (event) {
+        event.preventDefault();
+    }
+
+    const url = normalizeExternalUrl(
+        siteData && siteData.xUrl,
+        "https://x.com/"
+    );
+
+    window.location.assign(url);
+    return false;
+}
+
+
+function renderSite() {
+    normalizeData();
+
+    document.getElementById(
+        "headerTeamName"
+    ).textContent =
+        siteData.teamName;
+
+    document.getElementById(
+        "heroTeamName"
+    ).textContent =
+        siteData.teamName;
+
+    document.getElementById(
+        "footerTeamName"
+    ).textContent =
+        siteData.teamName;
+
+    document.getElementById(
+        "footerCopyright"
+    ).textContent =
+        "© 2026 " +
+        siteData.teamName +
+        " All Rights Reserved.";
+
+    document.getElementById(
+        "aboutText"
+    ).textContent =
+        siteData.about;
+
+    document.getElementById(
+        "sponsorText"
+    ).textContent =
+        siteData.sponsorText;
+
+    document.getElementById(
+        "heroDiscord"
+    ).href =
+        siteData.discordUrl || "#";
+
+    document.getElementById(
+        "navDiscordLink"
+    ).href =
+        siteData.discordUrl || "#";
+
+    const officialXUrl = normalizeExternalUrl(
+        siteData.xUrl,
+        "https://x.com/"
+    );
+
+    const heroX = document.getElementById("heroX");
+    const navXLink = document.getElementById("navXLink");
+
+    if (heroX) {
+        heroX.href = officialXUrl;
+        heroX.onclick = openOfficialX;
+    }
+
+    if (navXLink) {
+        navXLink.href = officialXUrl;
+        navXLink.onclick = openOfficialX;
+    }
+
+    renderResults();
+    renderDepartments();
+    renderApplicationDm();
+}
+
+
+/* =========================
+   RESULTS
+========================= */
+
+function renderResults() {
+    const grid =
+        document.getElementById("resultsGrid");
+
+    grid.innerHTML = "";
+
+    if (!siteData.results.length) {
+        grid.innerHTML = `
+            <div class="result-card">
+                <div class="result-title">
+                    戦績はまだありません
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    siteData.results.forEach(function(result) {
+        const card =
+            document.createElement("article");
+
+        card.className =
+            "result-card";
+
+        card.innerHTML = `
+            <div class="result-date">
+                ${escapeHtml(result.date || "")}
+            </div>
+
+            <div class="result-title">
+                ${escapeHtml(result.title || "")}
+            </div>
+
+            <div class="result-score">
+                ${escapeHtml(result.score || "")}
+            </div>
+
+            <div class="result-description">
+                ${escapeHtml(result.description || "")}
+            </div>
+        `;
+
+        grid.appendChild(card);
+    });
+}
+
+
+/* =========================
+   DEPARTMENTS
+========================= */
+
+function renderDepartments() {
+    const grid =
+        document.getElementById(
+            "departmentsGrid"
+        );
+
+    grid.innerHTML = "";
+
+    siteData.departments.forEach(
+        function(department, index) {
+
+            const card =
+                document.createElement("article");
+
+            card.className =
+                "department-card";
+
+            card.setAttribute(
+                "role",
+                "button"
+            );
+
+            card.setAttribute(
+                "tabindex",
+                "0"
+            );
+
+            card.onclick =
+                function() {
+                    openDepartmentModal(index);
+                };
+
+            card.onkeydown =
+                function(event) {
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+                        event.preventDefault();
+                        openDepartmentModal(index);
+                    }
+                };
+
+            const iconHtml =
+                department.icon
+                    ? `
+                        <div class="department-icon">
+                            <img
+                                src="${escapeAttribute(department.icon)}"
+                                alt=""
+                            >
+                        </div>
+                    `
+                    : `
+                        <div class="department-icon">
+                            <div class="department-icon-placeholder">
+                                NO IMAGE
+                            </div>
+                        </div>
+                    `;
+
+            const memberCount =
+                Array.isArray(department.members)
+                    ? department.members.length
+                    : 0;
+
+            card.innerHTML = `
+                ${iconHtml}
+
+                <div class="department-number">
+                    DEPARTMENT
+                    ${String(index + 1).padStart(2, "0")}
+                </div>
+
+                <div class="department-name">
+                    ${escapeHtml(department.name || "")}
+                </div>
+
+                <div class="department-description">
+                    ${escapeHtml(
+                        shortDescription(
+                            department.description || ""
+                        )
+                    )}
+                </div>
+
+                <div class="department-more">
+                    ${memberCount > 0
+                        ? memberCount + "名のメンバー"
+                        : "メンバー募集中"}
+                    ・ 詳細を見る
+                </div>
+            `;
+
+            grid.appendChild(card);
+        }
+    );
+}
+
+
+function shortDescription(text) {
+    if (text.length <= 100) {
+        return text;
+    }
+
+    return text.substring(0, 100) + "…";
+}
+
+
+/* =========================
+   DEPARTMENT MODAL
+========================= */
+
+function openDepartmentModal(index) {
+    const department =
+        siteData.departments[index];
+
+    if (!department) {
+        return;
+    }
+
+    document.getElementById(
+        "departmentModalLabel"
+    ).textContent =
+        "DEPARTMENT " +
+        String(index + 1).padStart(2, "0");
+
+    document.getElementById(
+        "departmentModalTitle"
+    ).textContent =
+        department.name;
+
+    const icon =
+        document.getElementById(
+            "departmentModalIcon"
+        );
+
+    if (department.icon) {
+        icon.innerHTML = `
+            <div class="department-icon">
+                <img
+                    src="${escapeAttribute(department.icon)}"
+                    alt=""
+                >
+            </div>
+        `;
+    } else {
+        icon.innerHTML = "";
+    }
+
+    document.getElementById(
+        "departmentModalDescription"
+    ).textContent =
+        department.description ||
+        "情報はありません。";
+
+    const membersContainer =
+        document.getElementById(
+            "departmentModalMembers"
+        );
+
+    const members =
+        Array.isArray(department.members)
+            ? department.members
+            : [];
+
+    if (!members.length) {
+        membersContainer.innerHTML = `
+            <div class="member-empty">
+                現在メンバー募集中です。
+            </div>
+        `;
+    } else {
+        membersContainer.innerHTML = `
+            <div class="section-label" style="margin-top:30px;">
+                MEMBERS
+            </div>
+
+            <div class="member-list">
+                ${members.map(function(member) {
+
+                    const imageHtml =
+                        member.image
+                            ? `
+                                <div class="member-image">
+                                    <img
+                                        src="${escapeAttribute(member.image)}"
+                                        alt=""
+                                    >
+                                </div>
+                            `
+                            : `
+                                <div class="member-image">
+                                    <div class="member-image-placeholder">
+                                        NO IMAGE
+                                    </div>
+                                </div>
+                            `;
+
+                    const xHtml =
+                        member.x
+                            ? `
+                                <a
+                                    class="member-x"
+                                    href="${escapeAttribute(member.x)}"
+                                    target="_blank"
+                                    rel="noopener"
+                                    onclick="event.stopPropagation()"
+                                >
+                                    Xを見る
+                                </a>
+                            `
+                            : "";
+
+                    return `
+                        <div class="member-card">
+                            ${imageHtml}
+
+                            <div>
+                                <div class="member-name">
+                                    ${escapeHtml(member.name || "名前未設定")}
+                                </div>
+
+                                <div class="member-role">
+                                    ${escapeHtml(member.role || "所属メンバー")}
+                                </div>
+
+                                ${xHtml}
+                            </div>
+                        </div>
+                    `;
+                }).join("")}
+            </div>
+        `;
+    }
+
+    document.getElementById(
+        "departmentModal"
+    ).classList.add("active");
+
+    document.body.style.overflow =
+        "hidden";
+}
+
+
+function closeDepartmentModal() {
+    document.getElementById(
+        "departmentModal"
+    ).classList.remove("active");
+
+    document.body.style.overflow =
+        "";
+}
+
+
+function handleModalBackgroundClick(event) {
+    if (
+        event.target ===
+        document.getElementById(
+            "departmentModal"
+        )
+    ) {
+        closeDepartmentModal();
+    }
+}
+
+
+/* =========================
+   APPLICATION DM
+========================= */
+
+function renderApplicationDm() {
+    const text =
+        document.getElementById(
+            "applicationDmText"
+        );
+
+    const button =
+        document.getElementById(
+            "applicationDmButton"
+        );
+
+    if (!text || !button) {
+        return;
+    }
+
+    text.textContent =
+        siteData.applicationDmText ||
+        defaultData.applicationDmText;
+
+    button.href =
+        siteData.xDmUrl ||
+        siteData.xUrl ||
+        "https://x.com/messages/compose";
+}
+
+
+/* =========================
+   ADMIN ROUTE
+========================= */
+
+function openAdmin() {
+    document.body.classList.add(
+        "admin-mode"
+    );
+
+    loadAdmin();
+
+    window.scrollTo(
+        0,
+        0
+    );
+}
+
+
+function openPublicSite() {
+    sessionStorage.setItem("proudAdminPreview", "1");
+    window.location.href = window.location.pathname;
+}
+
+function returnToAdmin(event) {
+    if (event) {
+        event.preventDefault();
+    }
+
+    sessionStorage.removeItem("proudAdminPreview");
+    window.location.hash = "admin";
+    checkRoute();
+    return false;
+}
+
+function checkAdminPreviewMode() {
+    const isPreview =
+        sessionStorage.getItem("proudAdminPreview") === "1";
+
+    document.body.classList.toggle(
+        "admin-preview-mode",
+        isPreview && !document.body.classList.contains("admin-mode")
+    );
+}
+
+
+function checkRoute() {
+    const hash =
+        window.location.hash.toLowerCase();
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const isAdmin =
+        hash === "#admin" ||
+        params.get("admin") === "true";
+
+    if (isAdmin) {
+        sessionStorage.removeItem("proudAdminPreview");
+        openAdmin();
+    } else {
+        document.body.classList.remove(
+            "admin-mode"
+        );
+
+        renderSite();
+        checkAdminPreviewMode();
+    }
+}
+
+
+window.addEventListener(
+    "hashchange",
+    checkRoute
+);
+
+window.addEventListener(
+    "popstate",
+    checkRoute
+);
+
+
+/* =========================
+   ADMIN LOAD
+========================= */
+
+function loadAdmin() {
+    document.getElementById(
+        "adminTeamName"
+    ).value =
+        siteData.teamName || "";
+
+    document.getElementById(
+        "adminXUrl"
+    ).value =
+        siteData.xUrl || "";
+
+    document.getElementById(
+        "adminDiscordUrl"
+    ).value =
+        siteData.discordUrl || "";
+
+    document.getElementById(
+        "adminAbout"
+    ).value =
+        siteData.about || "";
+
+    document.getElementById(
+        "adminSponsorText"
+    ).value =
+        siteData.sponsorText || "";
+
+    document.getElementById(
+        "adminRules"
+    ).value =
+        siteData.rules || "";
+
+    document.getElementById(
+        "adminXdmUrl"
+    ).value =
+        siteData.xDmUrl ||
+        "https://x.com/messages/compose";
+
+    document.getElementById(
+        "adminApplicationDmText"
+    ).value =
+        siteData.applicationDmText ||
+        defaultData.applicationDmText;
+
+    renderAdminDepartments();
+    renderAdminResults();
+}
+
+
+/* =========================
+   ADMIN DEPARTMENTS
+========================= */
+
+function renderAdminDepartments() {
+    const container =
+        document.getElementById(
+            "adminDepartments"
+        );
+
+    container.innerHTML = "";
+
+    siteData.departments.forEach(
+        function(department, index) {
+
+            if (!Array.isArray(department.members)) {
+                department.members = [];
+            }
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "admin-item";
+
+            const iconPreview =
+                department.icon
+                    ? `
+                        <div class="admin-image-preview">
+                            <img
+                                src="${escapeAttribute(department.icon)}"
+                                alt=""
+                            >
+                        </div>
+                    `
+                    : `
+                        <div class="admin-image-preview empty">
+                            部門アイコン<br>未設定
+                        </div>
+                    `;
+
+            item.innerHTML = `
+                <div class="admin-item-title">
+                    部門 ${index + 1}
+                </div>
+
+                <div class="admin-field">
+                    <label>部門名</label>
+
+                    <input
+                        type="text"
+                        class="department-name-input"
+                        value="${escapeAttribute(
+                            department.name || ""
+                        )}"
+                    >
+                </div>
+
+                <div class="admin-field">
+                    <label>部門アイコン画像</label>
+
+                    <div class="admin-icon-upload-box">
+                        <div class="admin-icon-upload-title">
+                            アイコン画像を追加
+                        </div>
+
+                        <div class="admin-icon-upload-text">
+                            ゲームのアイコンなどを画像ファイルから設定できます。
+                        </div>
+
+                        <label class="admin-upload-button">
+                            画像を選択
+                            <input
+                                type="file"
+                                accept="image/png,image/jpeg,image/webp"
+                                onchange="handleDepartmentIconUpload(${index}, this)"
+                            >
+                        </label>
+                    </div>
+
+                    <div class="admin-file-note">
+                        登録した画像は公開ページの部門カードと詳細画面に表示されます。
+                        画像の追加・変更・削除は管理画面からのみ行えます。
+                    </div>
+
+                    ${iconPreview}
+
+                    <div class="admin-buttons">
+                        <button
+                            type="button"
+                            class="admin-button danger"
+                            onclick="removeDepartmentIcon(${index})"
+                        >
+                            アイコンを削除
+                        </button>
+                    </div>
+                </div>
+
+                <div class="admin-field">
+                    <label>部門説明</label>
+
+                    <textarea
+                        class="department-description-input"
+                    >${escapeHtml(
+                        department.description || ""
+                    )}</textarea>
+                </div>
+
+                <div class="admin-field">
+                    <label>メンバー</label>
+
+                    <div id="adminMembers-${index}">
+                        ${renderAdminMembersHtml(
+                            index,
+                            department.members
+                        )}
+                    </div>
+
+                    <div class="admin-buttons">
+                        <button
+                            type="button"
+                            class="admin-button primary"
+                            onclick="addMember(${index})"
+                        >
+                            メンバーを追加
+                        </button>
+                    </div>
+                </div>
+
+                <div class="admin-buttons">
+                    <button
+                        type="button"
+                        class="admin-button danger"
+                        onclick="deleteDepartment(${index})"
+                    >
+                        この部門を削除
+                    </button>
+                </div>
+            `;
+
+            container.appendChild(item);
+        }
+    );
+}
+
+
+function renderAdminMembersHtml(
+    departmentIndex,
+    members
+) {
+    if (!members.length) {
+        return `
+            <div class="admin-file-note">
+                メンバーはまだ登録されていません。
+            </div>
+        `;
+    }
+
+    return members.map(
+        function(member, memberIndex) {
+
+            const preview =
+                member.image
+                    ? `
+                        <div class="admin-image-preview">
+                            <img
+                                src="${escapeAttribute(member.image)}"
+                                alt=""
+                            >
+                        </div>
+                    `
+                    : `
+                        <div class="admin-image-preview empty">
+                            メンバー画像<br>未設定
+                        </div>
+                    `;
+
+            return `
+                <div class="admin-member-item">
+
+                    <div class="admin-member-title">
+                        メンバー ${memberIndex + 1}
+                    </div>
+
+                    <div class="admin-member-grid">
+
+                        <div class="admin-field">
+                            <label>メンバー名</label>
+
+                            <input
+                                type="text"
+                                class="member-name-input"
+                                value="${escapeAttribute(member.name || "")}"
+                            >
+                        </div>
+
+                        <div class="admin-field">
+                            <label>役割</label>
+
+                            <input
+                                type="text"
+                                class="member-role-input"
+                                value="${escapeAttribute(member.role || "")}"
+                                placeholder="例：Player / Streamer"
+                            >
+                        </div>
+
+                    </div>
+
+                    <div class="admin-field">
+                        <label>X URL</label>
+
+                        <input
+                            type="url"
+                            class="member-x-input"
+                            value="${escapeAttribute(member.x || "")}"
+                            placeholder="https://x.com/..."
+                        >
+                    </div>
+
+                    <div class="admin-field">
+                        <label>メンバー画像</label>
+
+                        <div class="admin-member-image-row">
+                            ${preview}
+
+                            <div>
+                                <input
+                                    type="file"
+                                    accept="image/png,image/jpeg,image/webp"
+                                    onchange="handleMemberImageUpload(${departmentIndex}, ${memberIndex}, this)"
+                                >
+
+                                <div class="admin-file-note">
+                                    PNG・JPG・WEBP対応。
+                                    保存時にSupabase Storageへアップロードします。
+                                </div>
+
+                                <div class="admin-buttons">
+                                    <button
+                                        type="button"
+                                        class="admin-button danger"
+                                        onclick="removeMemberImage(${departmentIndex}, ${memberIndex})"
+                                    >
+                                        画像を削除
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-buttons">
+                        <button
+                            type="button"
+                            class="admin-button danger"
+                            onclick="deleteMember(${departmentIndex}, ${memberIndex})"
+                        >
+                            このメンバーを削除
+                        </button>
+                    </div>
+
+                </div>
+            `;
+        }
+    ).join("");
+}
+
+
+/* =========================
+   ADMIN CRUD
+========================= */
+
+function addDepartment() {
+    siteData.departments.push({
+        id: makeId(),
+        name: "新しい部門",
+        icon: "",
+        description:
+            "部門の説明を入力してください。",
+        members: []
+    });
+
+    renderAdminDepartments();
+
+    showAdminMessage(
+        "部門を追加しました。保存してください。"
+    );
+}
+
+
+function deleteDepartment(index) {
+    if (!confirm("この部門を削除しますか？")) {
+        return;
+    }
+
+    siteData.departments.splice(
+        index,
+        1
+    );
+
+    renderAdminDepartments();
+
+    showAdminMessage(
+        "部門を削除しました。保存してください。"
+    );
+}
+
+
+function addMember(departmentIndex) {
+    const department =
+        siteData.departments[departmentIndex];
+
+    if (!department) {
+        return;
+    }
+
+    if (!Array.isArray(department.members)) {
+        department.members = [];
+    }
+
+    department.members.push({
+        id: makeId(),
+        name: "新しいメンバー",
+        role: "Player",
+        x: "",
+        image: ""
+    });
+
+    renderAdminDepartments();
+
+    showAdminMessage(
+        "メンバーを追加しました。保存してください。"
+    );
+}
+
+
+function deleteMember(
+    departmentIndex,
+    memberIndex
+) {
+    const department =
+        siteData.departments[departmentIndex];
+
+    if (
+        !department ||
+        !Array.isArray(department.members)
+    ) {
+        return;
+    }
+
+    if (!confirm("このメンバーを削除しますか？")) {
+        return;
+    }
+
+    department.members.splice(
+        memberIndex,
+        1
+    );
+
+    renderAdminDepartments();
+
+    showAdminMessage(
+        "メンバーを削除しました。保存してください。"
+    );
+}
+
+
+function removeDepartmentIcon(index) {
+    if (!siteData.departments[index]) {
+        return;
+    }
+
+    siteData.departments[index].icon = "";
+
+    renderAdminDepartments();
+
+    showAdminMessage(
+        "部門アイコンを削除しました。保存してください。"
+    );
+}
+
+
+function removeMemberImage(
+    departmentIndex,
+    memberIndex
+) {
+    const member =
+        siteData.departments[departmentIndex]
+            ?.members?.[memberIndex];
+
+    if (!member) {
+        return;
+    }
+
+    member.image = "";
+
+    renderAdminDepartments();
+
+    showAdminMessage(
+        "メンバー画像を削除しました。保存してください。"
+    );
+}
+
+
+/* =========================
+   IMAGE PROCESSING
+========================= */
+
+function compressAdminImage(
+    file,
+    maxSize,
+    quality
+) {
+    return new Promise(
+        function(resolve, reject) {
+
+            if (
+                !file ||
+                !file.type.startsWith("image/")
+            ) {
+                reject(
+                    new Error(
+                        "画像ファイルを選択してください。"
+                    )
+                );
+                return;
+            }
+
+            const reader =
+                new FileReader();
+
+            reader.onload =
+                function(event) {
+
+                    const image =
+                        new Image();
+
+                    image.onload =
+                        function() {
+
+                            const longest =
+                                Math.max(
+                                    image.width,
+                                    image.height
+                                );
+
+                            const scale =
+                                Math.min(
+                                    1,
+                                    maxSize / longest
+                                );
+
+                            const canvas =
+                                document.createElement(
+                                    "canvas"
+                                );
+
+                            canvas.width =
+                                Math.max(
+                                    1,
+                                    Math.round(
+                                        image.width *
+                                        scale
+                                    )
+                                );
+
+                            canvas.height =
+                                Math.max(
+                                    1,
+                                    Math.round(
+                                        image.height *
+                                        scale
+                                    )
+                                );
+
+                            const context =
+                                canvas.getContext("2d");
+
+                            context.drawImage(
+                                image,
+                                0,
+                                0,
+                                canvas.width,
+                                canvas.height
+                            );
+
+                            let dataUrl =
+                                canvas.toDataURL(
+                                    "image/webp",
+                                    quality
+                                );
+
+                            if (
+                                !dataUrl.startsWith(
+                                    "data:image/webp"
+                                )
+                            ) {
+                                dataUrl =
+                                    canvas.toDataURL(
+                                        "image/jpeg",
+                                        quality
+                                    );
+                            }
+
+                            resolve(dataUrl);
+                        };
+
+                    image.onerror =
+                        function() {
+                            reject(
+                                new Error(
+                                    "画像を読み込めませんでした。"
+                                )
+                            );
+                        };
+
+                    image.src =
+                        event.target.result;
+                };
+
+            reader.onerror =
+                function() {
+                    reject(
+                        new Error(
+                            "画像ファイルを読み込めませんでした。"
+                        )
+                    );
+                };
+
+            reader.readAsDataURL(file);
+        }
+    );
+}
+
+
+async function handleDepartmentIconUpload(
+    index,
+    input
+) {
+    const file =
+        input.files &&
+        input.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    const allowedTypes = [
+        "image/png",
+        "image/jpeg",
+        "image/webp"
+    ];
+
+    if (!allowedTypes.includes(file.type)) {
+        alert(
+            "PNG・JPG・WEBPの画像を選択してください。"
+        );
+        input.value = "";
+        return;
+    }
+
+    try {
+        siteData.departments[index].icon =
+            await compressAdminImage(
+                file,
+                512,
+                0.82
+            );
+
+        renderAdminDepartments();
+
+        showAdminMessage(
+            "部門アイコンを登録しました。保存するとSupabase Storageへアップロードされます。"
+        );
+
+    } catch (error) {
+        console.error(error);
+        alert("画像の処理に失敗しました。");
+    }
+}
+
+
+async function handleMemberImageUpload(
+    departmentIndex,
+    memberIndex,
+    input
+) {
+    const file =
+        input.files &&
+        input.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    const allowedTypes = [
+        "image/png",
+        "image/jpeg",
+        "image/webp"
+    ];
+
+    if (!allowedTypes.includes(file.type)) {
+        alert(
+            "PNG・JPG・WEBPの画像を選択してください。"
+        );
+        input.value = "";
+        return;
+    }
+
+    try {
+        const member =
+            siteData.departments[departmentIndex]
+                ?.members?.[memberIndex];
+
+        if (!member) {
+            return;
+        }
+
+        member.image =
+            await compressAdminImage(
+                file,
+                512,
+                0.82
+            );
+
+        renderAdminDepartments();
+
+        showAdminMessage(
+            "メンバー画像を登録しました。保存するとSupabase Storageへアップロードされます。"
+        );
+
+    } catch (error) {
+        console.error(error);
+        alert("画像の処理に失敗しました。");
+    }
+}
+
+
+function dataUrlToBlob(dataUrl) {
+    const parts =
+        dataUrl.split(",");
+
+    const mimeMatch =
+        parts[0].match(
+            /data:([^;]+)/
+        );
+
+    const mime =
+        mimeMatch
+            ? mimeMatch[1]
+            : "image/webp";
+
+    const binary =
+        atob(parts[1]);
+
+    const bytes =
+        new Uint8Array(
+            binary.length
+        );
+
+    for (
+        let i = 0;
+        i < binary.length;
+        i++
+    ) {
+        bytes[i] =
+            binary.charCodeAt(i);
+    }
+
+    return new Blob(
+        [bytes],
+        { type: mime }
+    );
+}
+
+
+function extensionFromDataUrl(dataUrl) {
+    if (dataUrl.startsWith("data:image/jpeg")) {
+        return "jpg";
+    }
+
+    if (dataUrl.startsWith("data:image/png")) {
+        return "png";
+    }
+
+    return "webp";
+}
+
+
+async function uploadImageIfNeeded(
+    value,
+    folder,
+    id
+) {
+    if (!value) {
+        return "";
+    }
+
+    if (!value.startsWith("data:image/")) {
+        return value;
+    }
+
+    const extension =
+        extensionFromDataUrl(value);
+
+    const filePath =
+        folder +
+        "/" +
+        id +
+        "-" +
+        Date.now() +
+        "." +
+        extension;
+
+    const blob =
+        dataUrlToBlob(value);
+
+    const response =
+        await supabaseClient.storage
+            .from(STORAGE_BUCKET)
+            .upload(
+                filePath,
+                blob,
+                {
+                    contentType: blob.type,
+                    upsert: true,
+                    cacheControl: "3600"
+                }
+            );
+
+    if (response.error) {
+        throw response.error;
+    }
+
+    const publicUrl =
+        supabaseClient.storage
+            .from(STORAGE_BUCKET)
+            .getPublicUrl(filePath)
+            .data
+            .publicUrl;
+
+    return publicUrl;
+}
+
+
+/* =========================
+   ADMIN RESULTS
+========================= */
+
+function renderAdminResults() {
+    const container =
+        document.getElementById(
+            "adminResults"
+        );
+
+    container.innerHTML = "";
+
+    siteData.results.forEach(
+        function(result, index) {
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "admin-item";
+
+            item.innerHTML = `
+                <div class="admin-item-title">
+                    戦績 ${index + 1}
+                </div>
+
+                <div class="admin-field">
+                    <label>日付</label>
+
+                    <input
+                        type="text"
+                        class="result-date-input"
+                        value="${escapeAttribute(
+                            result.date || ""
+                        )}"
+                    >
+                </div>
+
+                <div class="admin-field">
+                    <label>大会名・タイトル</label>
+
+                    <input
+                        type="text"
+                        class="result-title-input"
+                        value="${escapeAttribute(
+                            result.title || ""
+                        )}"
+                    >
+                </div>
+
+                <div class="admin-field">
+                    <label>結果</label>
+
+                    <input
+                        type="text"
+                        class="result-score-input"
+                        value="${escapeAttribute(
+                            result.score || ""
+                        )}"
+                    >
+                </div>
+
+                <div class="admin-field">
+                    <label>詳細</label>
+
+                    <textarea
+                        class="result-description-input"
+                    >${escapeHtml(
+                        result.description || ""
+                    )}</textarea>
+                </div>
+
+                <div class="admin-buttons">
+                    <button
+                        class="admin-button danger"
+                        onclick="deleteResult(${index})"
+                    >
+                        この戦績を削除
+                    </button>
+                </div>
+            `;
+
+            container.appendChild(item);
+        }
+    );
+}
+
+
+function addResult() {
+    siteData.results.push({
+        id: makeId(),
+        date: "2026.00.00",
+        title: "新しい大会",
+        score: "RESULT",
+        description:
+            "大会結果の詳細を入力してください。"
+    });
+
+    renderAdminResults();
+
+    showAdminMessage(
+        "戦績を追加しました。"
+    );
+}
+
+
+function deleteResult(index) {
+    if (!confirm("この戦績を削除しますか？")) {
+        return;
+    }
+
+    siteData.results.splice(
+        index,
+        1
+    );
+
+    renderAdminResults();
+
+    showAdminMessage(
+        "戦績を削除しました。"
+    );
+}
+
+
+/* =========================
+   COLLECT ADMIN DATA
+========================= */
+
+function collectAdminData() {
+    siteData.teamName =
+        document.getElementById(
+            "adminTeamName"
+        ).value.trim();
+
+    const adminXUrlValue =
+        document.getElementById(
+            "adminXUrl"
+        ).value.trim();
+
+    if (adminXUrlValue) {
+        try {
+            const parsedXUrl =
+                new URL(adminXUrlValue);
+
+            if (
+                parsedXUrl.protocol !== "http:" &&
+                parsedXUrl.protocol !== "https:"
+            ) {
+                throw new Error("Invalid protocol");
+            }
+
+            siteData.xUrl =
+                parsedXUrl.href;
+        } catch (error) {
+            alert(
+                "公式X URLが正しくありません。https://x.com/ から始まるURLを入力してください。"
+            );
+            throw error;
+        }
+    } else {
+        siteData.xUrl = "";
+    }
+
+    siteData.discordUrl =
+        document.getElementById(
+            "adminDiscordUrl"
+        ).value.trim();
+
+    siteData.about =
+        document.getElementById(
+            "adminAbout"
+        ).value;
+
+    siteData.sponsorText =
+        document.getElementById(
+            "adminSponsorText"
+        ).value;
+
+    siteData.rules =
+        document.getElementById(
+            "adminRules"
+        ).value;
+
+    const departmentNames =
+        document.querySelectorAll(
+            ".department-name-input"
+        );
+
+    const departmentDescriptions =
+        document.querySelectorAll(
+            ".department-description-input"
+        );
+
+    siteData.departments =
+        Array.from(
+            departmentNames
+        ).map(
+            function(input, index) {
+
+                const oldDepartment =
+                    siteData.departments[index] || {};
+
+                const memberItems =
+                    document.querySelectorAll(
+                        "#adminMembers-" +
+                        index +
+                        " .admin-member-item"
+                    );
+
+                const members =
+                    Array.from(
+                        memberItems
+                    ).map(
+                        function(item, memberIndex) {
+
+                            const oldMember =
+                                Array.isArray(
+                                    oldDepartment.members
+                                )
+                                    ? oldDepartment.members[
+                                        memberIndex
+                                    ] || {}
+                                    : {};
+
+                            const nameInput =
+                                item.querySelector(
+                                    ".member-name-input"
+                                );
+
+                            const roleInput =
+                                item.querySelector(
+                                    ".member-role-input"
+                                );
+
+                            const xInput =
+                                item.querySelector(
+                                    ".member-x-input"
+                                );
+
+                            return {
+                                id:
+                                    oldMember.id ||
+                                    makeId(),
+
+                                name:
+                                    nameInput
+                                        ? nameInput.value.trim()
+                                        : (oldMember.name || ""),
+
+                                role:
+                                    roleInput
+                                        ? roleInput.value.trim()
+                                        : (oldMember.role || ""),
+
+                                x:
+                                    xInput
+                                        ? xInput.value.trim()
+                                        : (oldMember.x || ""),
+
+                                image:
+                                    oldMember.image || ""
+                            };
+                        }
+                    );
+
+                return {
+                    id:
+                        oldDepartment.id ||
+                        makeId(),
+
+                    name:
+                        input.value.trim(),
+
+                    icon:
+                        oldDepartment.icon || "",
+
+                    description:
+                        departmentDescriptions[index]
+                            ? departmentDescriptions[index].value
+                            : "",
+
+                    members:
+                        members
+                };
+            }
+        );
+
+    siteData.xDmUrl =
+        document.getElementById(
+            "adminXdmUrl"
+        ).value.trim();
+
+    siteData.applicationDmText =
+        document.getElementById(
+            "adminApplicationDmText"
+        ).value.trim();
+
+    const resultDates =
+        document.querySelectorAll(
+            ".result-date-input"
+        );
+
+    const resultTitles =
+        document.querySelectorAll(
+            ".result-title-input"
+        );
+
+    const resultScores =
+        document.querySelectorAll(
+            ".result-score-input"
+        );
+
+    const resultDescriptions =
+        document.querySelectorAll(
+            ".result-description-input"
+        );
+
+    const oldResults =
+        siteData.results || [];
+
+    siteData.results =
+        Array.from(
+            resultDates
+        ).map(
+            function(input, index) {
+                return {
+                    id:
+                        oldResults[index]?.id ||
+                        makeId(),
+
+                    date:
+                        input.value.trim(),
+
+                    title:
+                        resultTitles[index]
+                            ? resultTitles[index].value.trim()
+                            : "",
+
+                    score:
+                        resultScores[index]
+                            ? resultScores[index].value.trim()
+                            : "",
+
+                    description:
+                        resultDescriptions[index]
+                            ? resultDescriptions[index].value
+                            : ""
+                };
+            }
+        );
+
+    normalizeData();
+}
+
+
+/* =========================
+   SAVE TO SUPABASE
+========================= */
+
+async function saveAllData() {
+    try {
+        collectAdminData();
+    } catch (error) {
+        alert("入力内容の取得に失敗しました。\n" + (error?.message || error));
+        return;
+    }
+
+    if (!supabaseReady || !supabaseClient) {
+        alert("Supabaseに接続できていません。Publishable keyを確認してください。");
+        return;
+    }
+
+    const saveButton = document.querySelector('button[onclick="saveAllData()"]');
+
+    if (saveButton) {
+        saveButton.disabled = true;
+        saveButton.textContent = "保存中...";
+    }
+
+    try {
+        /* =========================
+           TEAM SETTINGS
+        ========================= */
+        const settingsQuery = await supabaseClient
+            .from("team_settings")
+            .select("id")
+            .order("id", { ascending: true })
+            .limit(1);
+
+        if (settingsQuery.error) throw settingsQuery.error;
+
+        const settingsId = settingsQuery.data?.[0]?.id ?? null;
+
+        const settingsPayload = {
+            team_name: siteData.teamName || "PROUD",
+            x_url: siteData.xUrl || "",
+            discord_url: siteData.discordUrl || "",
+            x_dm_url: siteData.xDmUrl || "https://x.com/messages/compose",
+            application_text: siteData.applicationDmText || defaultData.applicationDmText,
+            sponsor_text: siteData.sponsorText || "",
+            rules: siteData.rules || defaultData.rules,
+            updated_at: new Date().toISOString()
+        };
+
+        let settingsSave;
+        if (settingsId !== null) {
+            settingsSave = await supabaseClient
+                .from("team_settings")
+                .update(settingsPayload)
+                .eq("id", settingsId);
+        } else {
+            settingsSave = await supabaseClient
+                .from("team_settings")
+                .insert(settingsPayload);
+        }
+
+        if (settingsSave.error) throw settingsSave.error;
+
+        /* =========================
+           DEPARTMENTS
+           UUID / bigint の両方に対応
+        ========================= */
+        const oldDepartmentsResponse = await supabaseClient
+            .from("departments")
+            .select("id");
+
+        if (oldDepartmentsResponse.error) throw oldDepartmentsResponse.error;
+
+        const oldDepartmentIds = new Set(
+            (oldDepartmentsResponse.data || []).map(row => String(row.id))
+        );
+
+        const departmentIdMap = new Map();
+
+        // 既存部門を更新
+        for (let index = 0; index < siteData.departments.length; index++) {
+            const department = siteData.departments[index];
+            const id = String(department.id || "");
+
+            if (oldDepartmentIds.has(id)) {
+                const response = await supabaseClient
+                    .from("departments")
+                    .update({
+                        name: department.name || "",
+                        icon_url: department.icon || "",
+                        description: department.description || "",
+                        display_order: index,
+                        updated_at: new Date().toISOString()
+                    })
+                    .eq("id", department.id);
+
+                if (response.error) throw response.error;
+                departmentIdMap.set(id, department.id);
+            }
+        }
+
+        // 新規部門を追加
+        for (let index = 0; index < siteData.departments.length; index++) {
+            const department = siteData.departments[index];
+            const id = String(department.id || "");
+
+            if (!oldDepartmentIds.has(id)) {
+                const response = await supabaseClient
+                    .from("departments")
+                    .insert({
+                        name: department.name || "",
+                        icon_url: department.icon || "",
+                        description: department.description || "",
+                        display_order: index,
+                        updated_at: new Date().toISOString()
+                    })
+                    .select("id")
+                    .single();
+
+                if (response.error) throw response.error;
+
+                const newId = response.data.id;
+                departmentIdMap.set(id, newId);
+                department.id = newId;
+            }
+        }
+
+        const currentDepartmentIds = new Set(
+            siteData.departments.map(d => String(d.id))
+        );
+
+        const departmentsToDelete = [...oldDepartmentIds]
+            .filter(id => !currentDepartmentIds.has(id));
+
+        if (departmentsToDelete.length) {
+            const response = await supabaseClient
+                .from("departments")
+                .delete()
+                .in("id", departmentsToDelete);
+
+            if (response.error) throw response.error;
+        }
+
+        /* =========================
+           DEPARTMENT IMAGES
+        ========================= */
+        for (const department of siteData.departments) {
+            const departmentDbId =
+                departmentIdMap.get(String(department.id)) ?? department.id;
+
+            if (departmentDbId === null || departmentDbId === undefined || departmentDbId === "") {
+                throw new Error("部門IDの取得に失敗しました。");
+            }
+
+            department.icon = await uploadImageIfNeeded(
+                department.icon,
+                "departments",
+                departmentDbId
+            );
+
+            const response = await supabaseClient
+                .from("departments")
+                .update({
+                    icon_url: department.icon || "",
+                    updated_at: new Date().toISOString()
+                })
+                .eq("id", departmentDbId);
+
+            if (response.error) throw response.error;
+        }
+
+        /* =========================
+           MEMBERS
+           UUID / bigint の両方に対応
+        ========================= */
+        const oldMembersResponse = await supabaseClient
+            .from("members")
+            .select("id");
+
+        if (oldMembersResponse.error) throw oldMembersResponse.error;
+
+        const oldMemberIds = new Set(
+            (oldMembersResponse.data || []).map(row => String(row.id))
+        );
+
+        const currentMemberIds = new Set();
+
+        for (const department of siteData.departments) {
+            const departmentDbId =
+                departmentIdMap.get(String(department.id)) ?? department.id;
+
+            for (let memberIndex = 0; memberIndex < department.members.length; memberIndex++) {
+                const member = department.members[memberIndex];
+                const memberId = String(member.id || "");
+
+                member.image = await uploadImageIfNeeded(
+                    member.image,
+                    "members",
+                    member.id || makeId()
+                );
+
+                const row = {
+                    name: member.name || "",
+                    role: member.role || "Player",
+                    x_url: member.x || "",
+                    image_url: member.image || "",
+                    department_id: departmentDbId,
+                    display_order: memberIndex,
+                    updated_at: new Date().toISOString()
+                };
+
+                if (oldMemberIds.has(memberId)) {
+                    const response = await supabaseClient
+                        .from("members")
+                        .update(row)
+                        .eq("id", member.id);
+
+                    if (response.error) throw response.error;
+                    currentMemberIds.add(memberId);
+                } else {
+                    const response = await supabaseClient
+                        .from("members")
+                        .insert(row)
+                        .select("id")
+                        .single();
+
+                    if (response.error) throw response.error;
+
+                    member.id = response.data.id;
+                    currentMemberIds.add(String(response.data.id));
+                }
+            }
+        }
+
+        const membersToDelete = [...oldMemberIds]
+            .filter(id => !currentMemberIds.has(id));
+
+        if (membersToDelete.length) {
+            const response = await supabaseClient
+                .from("members")
+                .delete()
+                .in("id", membersToDelete);
+
+            if (response.error) throw response.error;
+        }
+
+        /* =========================
+           MATCH RESULTS
+           UUID / bigint の両方に対応
+        ========================= */
+        const oldResultsResponse = await supabaseClient
+            .from("match_results")
+            .select("id");
+
+        if (oldResultsResponse.error) throw oldResultsResponse.error;
+
+        const oldResultIds = new Set(
+            (oldResultsResponse.data || []).map(row => String(row.id))
+        );
+
+        const currentResultIds = new Set();
+
+        for (let index = 0; index < siteData.results.length; index++) {
+            const result = siteData.results[index];
+            const resultId = String(result.id || "");
+
+            let dateValue = null;
+
+            if (/^\d{4}\.\d{1,2}\.\d{1,2}$/.test(result.date)) {
+                dateValue = result.date.replaceAll(".", "-");
+            } else if (/^\d{4}-\d{1,2}-\d{1,2}$/.test(result.date)) {
+                dateValue = result.date;
+            }
+
+            const row = {
+                department_name: result.title || "",
+                opponent: "",
+                result: result.score || "",
+                score: result.score || "",
+                match_date: dateValue,
+                description: result.description || "",
+                display_order: index,
+                updated_at: new Date().toISOString()
+            };
+
+            if (oldResultIds.has(resultId)) {
+                const response = await supabaseClient
+                    .from("match_results")
+                    .update(row)
+                    .eq("id", result.id);
+
+                if (response.error) throw response.error;
+                currentResultIds.add(resultId);
+            } else {
+                const response = await supabaseClient
+                    .from("match_results")
+                    .insert(row)
+                    .select("id")
+                    .single();
+
+                if (response.error) throw response.error;
+
+                result.id = response.data.id;
+                currentResultIds.add(String(response.data.id));
+            }
+        }
+
+        const resultsToDelete = [...oldResultIds]
+            .filter(id => !currentResultIds.has(id));
+
+        if (resultsToDelete.length) {
+            const response = await supabaseClient
+                .from("match_results")
+                .delete()
+                .in("id", resultsToDelete);
+
+            if (response.error) throw response.error;
+        }
+
+        /* =========================
+           保存完了
+        ========================= */
+        try {
+            localStorage.removeItem("teamWebsiteData");
+        } catch (e) {}
+
+        showAdminMessage("Supabaseへ保存しました。");
+        alert("保存しました。\n別の端末からも同じデータを読み込めます。");
+
+    } catch (error) {
+        console.error(error);
+        alert(
+            "保存に失敗しました。\n" +
+            (error?.message || String(error)) +
+            "\n\nSupabaseのRLS・テーブル設定・Storageポリシーを確認してください。"
+        );
+    } finally {
+        if (saveButton) {
+            saveButton.disabled = false;
+            saveButton.textContent = "保存する";
+        }
+    }
+}
+
+
+function showAdminMessage(message) {
+    const element =
+        document.getElementById(
+            "adminSaveMessage"
+        );
+
+    element.textContent =
+        message;
+
+    setTimeout(
+        function() {
+            if (
+                document.body.classList.contains(
+                    "admin-mode"
+                )
+            ) {
+                element.textContent =
+                    "管理画面";
+            }
+        },
+        2500
+    );
+}
+
+
+async function resetData() {
+    if (
+        !confirm(
+            "Supabase上のデータを初期状態に戻しますか？"
+        )
+    ) {
+        return;
+    }
+
+    if (!supabaseReady) {
+        alert(
+            "Supabaseに接続できていません。"
+        );
+        return;
+    }
+
+    siteData =
+        cloneDefaultData();
+
+    normalizeData();
+
+    try {
+        await saveAllData();
+
+        loadAdmin();
+        renderSite();
+
+        showAdminMessage(
+            "初期データに戻しました。"
+        );
+
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+/* =========================
+   ESCAPE
+========================= */
+
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+function escapeAttribute(value) {
+    return escapeHtml(value);
+}
+
+
+/* =========================
+   KEYBOARD
+========================= */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+        if (
+            event.key === "Escape"
+        ) {
+            closeDepartmentModal();
+        }
+    }
+);
+
+
+/* =========================
+   START
+========================= */
+
+(async function() {
+    await loadData();
+    renderSite();
+    checkRoute();
+})();
+
+</script>
+
+</body>
+</html>
